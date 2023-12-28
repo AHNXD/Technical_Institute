@@ -9,7 +9,7 @@
 <body>
     <form id="AllBranches" runat="server">
         <div style="display:flex;flex-direction:column;text-align:center">
-            <asp:Label ID="Title" runat="server" Text="Technical Institute"></asp:Label>
+            <h1><asp:Label ID="Title" runat="server" Text="Technical Institute"></asp:Label></h1>
              <asp:Button ID="B1" runat="server" Text="" onClick="Button_Click1"/>
              <asp:Button ID="B2" runat="server" Text="" onClick="Button_Click2"/>
              <asp:Button ID="B3" runat="server" Text="" onClick="Button_Click3"/>
