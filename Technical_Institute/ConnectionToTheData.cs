@@ -11,7 +11,7 @@ namespace Technical_Institute
     public static class ConnectionToTheData
     {
         static string connectionString = "Data Source=AHN\\SQLEXPRESS;database=Technical_Institute;Integrated Security=SSPI";
-        
+        static int x = 0;
         public static DataSet getAllBranches()
         {
             DataSet ds = new DataSet();
