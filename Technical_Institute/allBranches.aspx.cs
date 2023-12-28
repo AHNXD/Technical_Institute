@@ -12,9 +12,9 @@ namespace Technical_Institute
         protected void Page_Load(object sender, EventArgs e)
         {
             var data = ConnectionToTheData.getAllBranches();
-            B1.Text = data.Tables[0].Rows[0][1].ToString();
-            B2.Text = data.Tables[0].Rows[1][1].ToString();
-            B3.Text = data.Tables[0].Rows[2][1].ToString();
+            B1.Text = data.Rows[0][1].ToString();
+            B2.Text = data.Rows[1][1].ToString();
+            B3.Text = data.Rows[2][1].ToString();
         }
         protected void Button_Click1(object sender, EventArgs e)
         {

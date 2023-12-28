@@ -12,23 +12,23 @@ namespace Technical_Institute
         protected void Page_Load(object sender, EventArgs e)
         {
             var data = ConnectionToTheData.getAllBranches();
-            gvGetAllBranches.DataSource = data.Tables[0];
+            gvGetAllBranches.DataSource = data;
             gvGetAllBranches.DataBind();
 
             data = ConnectionToTheData.getBranch(1);
-            gvGetBranch.DataSource = data.Tables[0];
+            gvGetBranch.DataSource = data;
             gvGetBranch.DataBind();
 
             data = ConnectionToTheData.getSubjectFromBranch(1);
-            gvgetSubjectFromBranch.DataSource = data.Tables[0];
+            gvgetSubjectFromBranch.DataSource = data;
             gvgetSubjectFromBranch.DataBind();
 
             data = ConnectionToTheData.getSubjectFromBranchForSpecificYear(1,2);
-            gvgetSubjectFromBranchForSpecificYear.DataSource = data.Tables[0];
+            gvgetSubjectFromBranchForSpecificYear.DataSource = data;
             gvgetSubjectFromBranchForSpecificYear.DataBind();
 
             data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(1, 2 ,1);
-            gvgetSubjectFromBranchForSpecificYearForSpecificSemester.DataSource = data.Tables[0];
+            gvgetSubjectFromBranchForSpecificYearForSpecificSemester.DataSource = data;
             gvgetSubjectFromBranchForSpecificYearForSpecificSemester.DataBind();
         }
     }

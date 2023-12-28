@@ -11,9 +11,9 @@ namespace Technical_Institute
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = StateData.branchID;
+            int id = Convert.ToInt32(Request.QueryString["branchID"]);
             var branchName = ConnectionToTheData.getBranch(id);
-            BranchName.Text = branchName.Tables[0].Rows[0][1].ToString();
+            BranchName.Text = branchName.Rows[0][1].ToString();
 
             var data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(id, 1, 1);
             FirstYearSemesterOne.DataSource = data;
