@@ -6,8 +6,6 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace Technical_Institute
 {
