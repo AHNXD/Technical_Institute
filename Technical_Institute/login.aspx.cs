@@ -15,7 +15,30 @@ namespace Technical_Institute
         }
         protected void Button_Click(object sender, EventArgs e)
         {
-            Response.Redirect("allBranches.aspx");
+            try
+            {
+                var data = ConnectionToTheData.getSpecificUser(InputNationalNumber.Value, InputPassword.Value);
+                if (data.Rows.Count == 0)
+                {
+                    LoginState.Text = "Check Your National Number And Password.";
+                }
+                else
+                {
+                    if (data.Rows[0][9].ToString() == InputPassword.Value)
+                    {
+                        Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
+                    }
+                    else
+                    {
+                        LoginState.Text = "Check Your National Number And Password.";
+                    }
+                }
+            }catch (Exception ex)
+            {
+                LoginState.Text = "Check Your National Number And Password.";
+            }
+           
+            
         }
     }
 }

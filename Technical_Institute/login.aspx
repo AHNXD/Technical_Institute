@@ -12,10 +12,10 @@
             <h1>Login</h1>
             <hr />
             <h3>National Number:</h3>
-            <input id="InputNationalNumber" type="text" /><br />
+            <input id="InputNationalNumber" type="text" runat="server"/><br />
             <h3>Password:</h3>
-            <input id="InputPassword" type="password" /><br /><br />
-            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="Button_Click"/><br /><br />
+            <input id="InputPassword" type="password" runat="server"/><br /><br />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="Button_Click"/><asp:Label ID="LoginState" runat="server" Text=""></asp:Label><br /><br />
             <pre>Dont Have an Account ? <a href="signUp.aspx">Create One.</a></pre>
         </div>
     </form>
