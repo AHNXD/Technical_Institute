@@ -364,3 +364,6 @@ FodyWeavers.xsd
 /Technical_Institute/Web.config
 /Technical_Institute/Web.Debug.config
 /Technical_Institute/Web.Release.config
+/Technical_Institute/Web.config
+/Technical_Institute/Web.Debug.config
+/Technical_Institute/Web.Release.config
