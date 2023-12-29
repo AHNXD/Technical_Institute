@@ -64,5 +64,46 @@ namespace Technical_Institute
             dataAdapter.Fill(ds);
             return ds.Tables[0];
         }
+        public static DataTable getAllStudents()
+        {
+            DataSet ds = new DataSet();
+            string query = "select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID\r\n";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
+        public static DataTable getStudentRegisteredInSpecificBranch(int id)
+        {
+            DataSet ds = new DataSet();
+            string query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.ID_Branch = {id}";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
+        public static DataTable getRegisteredStudents(string status)
+        {
+            DataSet ds = new DataSet();
+            string query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.Is_Accepted ={status}";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
+        public static DataTable getRegisteredStudentsInSpecificBranch(int id ,string status)
+        {
+            DataSet ds = new DataSet();
+            string query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.ID_Branch ={id} and r.Is_Accepted ={status}";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
+
     }
 }
