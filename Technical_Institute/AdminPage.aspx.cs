@@ -11,9 +11,10 @@ namespace Technical_Institute
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            brunchesList.Items.Add(new ListItem("Computer Engineering", "1"));
-            brunchesList.Items.Add(new ListItem("Network Engineering", "2"));
-            brunchesList.Items.Add(new ListItem("Software Engineering", "3"));
+            brunchesList.Items.Add(new ListItem("All Students","1"));
+            brunchesList.Items.Add(new ListItem("Computer Engineering","2"));
+            brunchesList.Items.Add(new ListItem("Network Engineering","3"));
+            brunchesList.Items.Add(new ListItem("Software Engineering","4"));
         }
         protected void Button_Click1(object sender, EventArgs e)
         {
