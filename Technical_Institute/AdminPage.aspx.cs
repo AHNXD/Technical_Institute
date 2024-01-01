@@ -26,7 +26,7 @@ namespace Technical_Institute
                     data = ConnectionToTheData.getAllRegisteredStudentsFromAllBranches();
                 }else
                 {
-                    int state = status == "accepted" ? 1 : status == "Rejected" ? 0 : -1;
+                    int state = status == "accepted" ? 1 : status == "rejected" ? 0 : -1;
                     data = ConnectionToTheData.getAllRegisteredStudentsWithSpecificStatusFromAllBranches(state);
                 }
             }
@@ -37,7 +37,7 @@ namespace Technical_Institute
                     data = ConnectionToTheData.getAllRegisteredStudentsInSpecificBranch(int.Parse(branchesList.SelectedValue));
                 }else
                 {
-                    int state = status == "accepted" ? 1 : status == "Rejected" ? 0 : -1;
+                    int state = status == "accepted" ? 1 : status == "rejected" ? 0 : -1;
                     data = ConnectionToTheData.getAllRegisteredStudentsWithSpecificStatusInSpecificBranch(int.Parse(branchesList.SelectedValue),state);
                 }
             }
