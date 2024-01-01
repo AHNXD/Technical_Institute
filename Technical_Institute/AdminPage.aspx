@@ -7,14 +7,20 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-             <asp:RadioButtonList ID="brunchesList" runat="server" RepeatDirection="Horizontal"></asp:RadioButtonList><br /> <br />
-             <asp:Button ID="Btn1" runat="server" Text="All Students" onClick="Button_Click1"/> <br /> <br />
-             <asp:Button ID="Btn2" runat="server" Text="Accepted students" onClick="Button_Click2"/> <br /> <br />
-             <asp:Button ID="Btn3" runat="server" Text="Rejected students" onClick="Button_Click3"/> <br /> <br />
-             <asp:Button ID="Btn4" runat="server" Text="Students are in a waiting state" onClick="Button_Click4"/>
-           
+    <form id="adminPage" runat="server">
+        <div style="text-align:center">
+             <asp:RadioButtonList ID="branchesList" runat="server" >
+                 <asp:ListItem Text="All Branches" Value="0" selected="true"/>
+                 <asp:ListItem Text="Computer Engineering" Value="1" />
+                 <asp:ListItem Text="Network Engineering" Value="2" />
+                 <asp:ListItem Text="Software Engineering" Value="3" />
+             </asp:RadioButtonList>
+             <asp:Button ID="BtnAll" runat="server" Text="All Students" onClick="Button_Click" CommandArgument="all"/> <br /> <br />
+             <asp:Button ID="BtnAccepted" runat="server" Text="Accepted students" onClick="Button_Click" CommandArgument="accepted"/> <br /> <br />
+             <asp:Button ID="BtnRejected" runat="server" Text="Rejected students" onClick="Button_Click" CommandArgument="rejected"/> <br /> <br />
+             <asp:Button ID="BtnPending" runat="server" Text="Pending students" onClick="Button_Click" CommandArgument="pending"/><br /> <br />
+             <hr />
+             <asp:GridView ID="viewStudents" runat="server"></asp:GridView>
         </div>
     </form>
 </body>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,26 +12,37 @@ namespace Technical_Institute
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            brunchesList.Items.Add(new ListItem("All Students","1"));
-            brunchesList.Items.Add(new ListItem("Computer Engineering","2"));
-            brunchesList.Items.Add(new ListItem("Network Engineering","3"));
-            brunchesList.Items.Add(new ListItem("Software Engineering","4"));
         }
-        protected void Button_Click1(object sender, EventArgs e)
+        protected void Button_Click(object sender, EventArgs e)
         {
-            Response.Redirect("showStudents.aspx");
-        }
-        protected void Button_Click2(object sender, EventArgs e)
-        {
-            Response.Redirect("showStudents.aspx?status=1");
-        }
-        protected void Button_Click3(object sender, EventArgs e)
-        {
-            Response.Redirect("showStudents.aspx?status=0");
-        }
-        protected void Button_Click4(object sender, EventArgs e)
-        {
-            Response.Redirect("showStudents.aspx?status=2");
+            DataTable data = new DataTable();
+            Button btn = (Button)sender;
+            string status = btn.CommandArgument.ToString();
+
+            if (branchesList.SelectedValue == "0")
+            {
+                if (status == "all")
+                {
+                    data = ConnectionToTheData.getAllRegisteredStudentsFromAllBranches();
+                }else
+                {
+                    int state = status == "accepted" ? 1 : status == "Rejected" ? 0 : -1;
+                    data = ConnectionToTheData.getAllRegisteredStudentsWithSpecificStatusFromAllBranches(state);
+                }
+            }
+            else
+            {
+                if(status == "all")
+                {
+                    data = ConnectionToTheData.getAllRegisteredStudentsInSpecificBranch(int.Parse(branchesList.SelectedValue));
+                }else
+                {
+                    int state = status == "accepted" ? 1 : status == "Rejected" ? 0 : -1;
+                    data = ConnectionToTheData.getAllRegisteredStudentsWithSpecificStatusInSpecificBranch(int.Parse(branchesList.SelectedValue),state);
+                }
+            }
+            viewStudents.DataSource = data;
+            viewStudents.DataBind();
         }
     }
 }

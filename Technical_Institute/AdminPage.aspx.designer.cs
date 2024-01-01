@@ -15,57 +15,66 @@ namespace Technical_Institute
     {
 
         /// <summary>
-        /// form1 control.
+        /// adminPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm adminPage;
 
         /// <summary>
-        /// brunchesList control.
+        /// branchesList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList brunchesList;
+        protected global::System.Web.UI.WebControls.RadioButtonList branchesList;
 
         /// <summary>
-        /// Btn1 control.
+        /// BtnAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn1;
+        protected global::System.Web.UI.WebControls.Button BtnAll;
 
         /// <summary>
-        /// Btn2 control.
+        /// BtnAccepted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn2;
+        protected global::System.Web.UI.WebControls.Button BtnAccepted;
 
         /// <summary>
-        /// Btn3 control.
+        /// BtnRejected control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn3;
+        protected global::System.Web.UI.WebControls.Button BtnRejected;
 
         /// <summary>
-        /// Btn4 control.
+        /// BtnPending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn4;
+        protected global::System.Web.UI.WebControls.Button BtnPending;
+
+        /// <summary>
+        /// viewStudents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView viewStudents;
     }
 }
