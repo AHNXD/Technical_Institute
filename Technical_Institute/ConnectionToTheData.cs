@@ -56,6 +56,16 @@ namespace Technical_Institute
             dataAdapter.Fill(ds);
             return ds.Tables[0];
         }
+        public static DataTable getYearsAndSemesters(int id)
+        {
+            DataSet ds = new DataSet();
+            string query = $"select distinct Year_Number year, Semester_Number semester from SubjectsToBranches where ID_Branch={id} order by 1,2";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
         public static DataTable getSubjectFromBranchForSpecificYearForSpecificSemester(int id, int year , int semester)
         {
             DataSet ds = new DataSet();

@@ -51,30 +51,21 @@ namespace Technical_Institute
         protected global::System.Web.UI.WebControls.Label degree;
 
         /// <summary>
-        /// B1 control.
+        /// rptBranches control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button B1;
+        protected global::System.Web.UI.WebControls.Repeater rptBranches;
 
         /// <summary>
-        /// B2 control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button B2;
-
-        /// <summary>
-        /// B3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button B3;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
     }
 }

@@ -8,7 +8,22 @@
 </head>
 <body>
     <form id="BranchInfo" runat="server">
+
+
         <h1><asp:Label ID="BranchName" runat="server" Text="Branch"></asp:Label></h1>
+
+
+        <asp:Repeater runat="server" ID="Repeater_Years">
+            <ItemTemplate>
+                <br/><br/>
+                <h3>Year: <asp:Label runat="server" Text='<%# Eval("year") %>'></asp:Label></h3>
+                <h5>Semester: <asp:Label runat="server" Text='<%# Eval("semester") %>'></asp:Label></h5>
+
+                <asp:GridView runat="server" DataSource='<%# GetSubjects(Eval("year").ToString(), Eval("semester").ToString()) %>'></asp:GridView>
+            </ItemTemplate>
+        </asp:Repeater>
+
+
         <br/><br/>
         <h3><asp:Label ID="FirstYear" runat="server" Text="*First Year:"></asp:Label></h3>
         <br/><br/>

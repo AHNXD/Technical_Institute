@@ -27,7 +27,7 @@ namespace Technical_Institute
                 {
                     if (data.Rows[0][9].ToString() == InputPassword.Value)
                     {
-                        if(data.Rows[0][1].ToString() == "0")
+                        if(data.Rows[0][1].ToString().ToLower() == "false")
                             Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
                         else
                             Response.Redirect($"adminPage.aspx");

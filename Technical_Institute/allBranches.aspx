@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allBranches.aspx.cs" Inherits="Technical_Institute.allBranches" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allBranches.aspx.cs" Inherits="Technical_Institute.allBranches" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -12,9 +12,25 @@
             <h1><asp:Label ID="Title" runat="server" Text="Technical Institute"></asp:Label></h1>
             <h3><asp:Label ID="username" runat="server" Text="Label"></asp:Label></h3>
             <h3><asp:Label ID="degree" runat="server" Text="Label"></asp:Label></h3>
-             <asp:Button ID="B1" runat="server" Text="" onClick="Button_Click1"/>
+
+
+            <asp:Repeater runat="server" ID="rptBranches" OnItemCommand="rptBranches_ItemCommand">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server" Text='<%# Eval("Branch_Name") %>' CommandName="OpenBranch" CommandArgument='<%# Eval("ID") %>' />
+                </ItemTemplate>
+            </asp:Repeater>
+
+            <hr />
+            <asp:Repeater runat="server" ID="Repeater1">
+                <ItemTemplate>
+                    <asp:HyperLink runat="server" Text='<%# Eval("Branch_Name") %>' NavigateUrl='<%# $"dataForSpecificBranch.aspx?branchID={Eval("ID")}" %>' />
+                </ItemTemplate>
+            </asp:Repeater>
+
+
+<%--         <asp:Button ID="B1" runat="server" Text="" onClick="Button_Click1"/>
              <asp:Button ID="B2" runat="server" Text="" onClick="Button_Click2"/>
-             <asp:Button ID="B3" runat="server" Text="" onClick="Button_Click3"/>
+             <asp:Button ID="B3" runat="server" Text="" onClick="Button_Click3"/>--%>
         </div>
     </form>
 </body>
