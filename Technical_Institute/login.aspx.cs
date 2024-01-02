@@ -25,17 +25,10 @@ namespace Technical_Institute
                 }
                 else
                 {
-                    if (data.Rows[0][9].ToString() == InputPassword.Value)
-                    {
-                        if(data.Rows[0][1].ToString().ToLower() == "false")
-                            Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
-                        else
-                            Response.Redirect($"adminPage.aspx");
-                    }
+                    if(data.Rows[0][1].ToString().ToLower() == "false")
+                        Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
                     else
-                    {
-                        LoginState.Text = "Check Your National Number And Password.";
-                    }
+                        Response.Redirect($"adminPage.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
                 }
             }catch (Exception ex)
             {

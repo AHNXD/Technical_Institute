@@ -89,7 +89,7 @@ namespace Technical_Institute
         public static DataTable getSpecificUser(string national_number,string password)
         {
             DataSet ds = new DataSet();
-            string query = $"select u.ID,u.Is_Admin,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,us.Certificate_Type,u.National_Number,u.Password from Users u left join User_Students us on u.ID = us.ID where u.National_Number = {national_number}";
+            string query = $"select u.ID,u.Is_Admin,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,us.Certificate_Type,u.National_Number,u.Password from Users u left join User_Students us on u.ID = us.ID where u.National_Number = {national_number} and u.Password = {password}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
             var commandBuilder = new SqlCommandBuilder(dataAdapter);
