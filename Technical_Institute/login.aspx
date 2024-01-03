@@ -15,7 +15,7 @@
             <input id="InputNationalNumber" type="text" runat="server"/><br />
             <h3>Password:</h3>
             <input id="InputPassword" type="password" runat="server"/><br /><br />
-            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="Button_Click"/><asp:Label ID="LoginState" runat="server" Text=""></asp:Label><br /><br />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="Button_Login"/><asp:Label ID="LoginState" runat="server" Text=""></asp:Label><br /><br />
             <pre>Dont Have an Account ? <a href="signUp.aspx">Create One.</a></pre>
         </div>
     </form>

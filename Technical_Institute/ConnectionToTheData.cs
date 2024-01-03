@@ -96,6 +96,16 @@ namespace Technical_Institute
             dataAdapter.Fill(ds);
             return ds.Tables[0];
         }
+        public static DataTable checkUser(string national_number, string password)
+        {
+            DataSet ds = new DataSet();
+            string query = $"select u.ID,u.Is_Admin,u.National_Number,u.Password from Users u where u.National_Number = {national_number} and u.Password = {password}";
+            var dbConnection = new SqlConnection(connectionString);
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            dataAdapter.Fill(ds);
+            return ds.Tables[0];
+        }
         public static bool addUser(bool isAdmin, string first_name, string last_name, string national_number, string phone, char gender, float degree, string certificate_type, string password)
         {
             string query = $"insert into Users (Is_Admin,First_Name,Last_Name,Gender,Phone_Number,National_Number,Password) values (@isAdmin,@first_name,@last_name,@gender,@phone,@national_number,@password)";
@@ -120,44 +130,75 @@ namespace Technical_Institute
                 }
                 catch (Exception ex) { return false; }finally { connection.Close(); }
             }
+
             if(isAdmin)
             {
                 return rows > 0 ? true : false;
             }
             else
             {
-                try
+                if (rows > 0)
                 {
-                    DataSet ds = new DataSet();
-                    query = $"select top 1 * from Users order by ID desc";
-                    var dbConnection = new SqlConnection(connectionString);
-                    var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                    dataAdapter.Fill(ds);
-                    id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-                }
-                catch (Exception ex) { return false; }
+                    try
+                    {
+                        DataSet ds = new DataSet();
+                        query = $"select top 1 * from Users order by ID desc";
+                        var dbConnection = new SqlConnection(connectionString);
+                        var dataAdapter = new SqlDataAdapter(query, dbConnection);
+                        var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                        dataAdapter.Fill(ds);
+                        id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                    }
+                    catch { return false; }
 
-                query = "insert into User_Students values (@id,@degree,@certificateType)";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    query = "insert into User_Students values (@id,@degree,@certificateType)";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         try
                         {
-                            command.Parameters.AddWithValue("@id", id);
-                            command.Parameters.AddWithValue("@degree", degree);
-                            command.Parameters.AddWithValue("@certificateType", certificate_type);
+                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(query, connection))
+                            {
+                                command.Parameters.AddWithValue("@id", id);
+                                command.Parameters.AddWithValue("@degree", degree);
+                                command.Parameters.AddWithValue("@certificateType", certificate_type);
 
-                            rows = command.ExecuteNonQuery();
+                                rows = command.ExecuteNonQuery();
+                            }
                         }
-                        catch (Exception ex) { return false; }
+                        catch {
+                            try
+                            {
+                                DataSet ds = new DataSet();
+                                query = $"delete from Users u where u.ID = {id}";
+                                var dbConnection = new SqlConnection(connectionString);
+                                var dataAdapter = new SqlDataAdapter(query, dbConnection);
+                                var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                dataAdapter.Fill(ds);
+                                id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                            }
+                            catch{ return false; }
+                            return false; }
                         finally { connection.Close(); }
                     }
-                }
-                return rows > 0 ? true: false;
-            }
+                    if(rows > 0)return true;
+                    else
+                    {
+                        try
+                        {
+                            DataSet ds = new DataSet();
+                            query = $"delete from Users u where u.ID = {id}";
+                            var dbConnection = new SqlConnection(connectionString);
+                            var dataAdapter = new SqlDataAdapter(query, dbConnection);
+                            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                            dataAdapter.Fill(ds);
+                            id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                        }
+                        catch { return false; }
+                    }
+                }else
+                { return false; }
+            }return false;
         }
         public static DataTable getAllRegisteredStudentsFromAllBranches()
         {
@@ -207,7 +248,5 @@ namespace Technical_Institute
             dataAdapter.Fill(ds);
             return ds.Tables[0];
         }
-      
-
     }
 }

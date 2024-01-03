@@ -14,28 +14,26 @@ namespace Technical_Institute
         {
 
         }
-        protected void Button_Click(object sender, EventArgs e)
+        protected void Button_Login(object sender, EventArgs e)
         {
             try
             {
-                var data = ConnectionToTheData.getSpecificUser(InputNationalNumber.Value, InputPassword.Value);
+                var data = ConnectionToTheData.checkUser(InputNationalNumber.Value, InputPassword.Value);
                 if (data.Rows.Count == 0)
                 {
-                    LoginState.Text = "Check Your National Number And Password.";
+                    LoginState.Text = "  Check Your National Number And Password.";
                 }
                 else
                 {
-                    if(data.Rows[0][1].ToString().ToLower() == "false")
+                    if (data.Rows[0][1].ToString().ToLower() == "false")
                         Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
                     else
                         Response.Redirect($"adminPage.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
                 }
             }catch (Exception ex)
             {
-                LoginState.Text = "Check Your National Number And Password.";
+                LoginState.Text = "  Check Your National Number And Password.";
             }
-           
-            
         }
     }
 }
