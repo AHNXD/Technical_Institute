@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="adminPage" runat="server">
-        <div style="text-align:center">
+        <div style="justify-items:center;text-align:center;width:auto;">
              <asp:RadioButtonList ID="branchesList" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                  <asp:ListItem Text="All Branches" Value="0" selected="true"/>
                  <asp:ListItem Text="Computer Engineering" Value="1" />

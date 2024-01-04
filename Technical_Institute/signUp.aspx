@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="SignUp" runat="server">
-        <div>
+        <div style="justify-items:center;text-align:center;width:auto;">
             <h1>SignUp</h1>
             <hr />
             <h3>First Name:</h3>

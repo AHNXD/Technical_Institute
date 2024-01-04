@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="Login" runat="server">
-        <div>
+        <div style="justify-items:center;text-align:center;width:auto;">
             <h1>Login</h1>
             <hr />
             <h3>National Number:</h3>

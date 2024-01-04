@@ -14,8 +14,6 @@ namespace Technical_Institute
             var data = ConnectionToTheData.getAllBranches();
             rptBranches.DataSource = data;
             rptBranches.DataBind();
-            Repeater1.DataSource = data;
-            Repeater1.DataBind();
 
             //B1.Text = data.Rows[0][1].ToString();
             //B2.Text = data.Rows[1][1].ToString();
@@ -32,20 +30,10 @@ namespace Technical_Institute
                 degree.Text = data.Rows[0][6].ToString();
             }
         }
-        //protected void Button_Click1(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("dataForSpecificBranch.aspx?branchID=1");
-        //}
-        //protected void Button_Click2(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("dataForSpecificBranch.aspx?branchID=2");
-        //}
-        //protected void Button_Click3(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("dataForSpecificBranch.aspx?branchID=3");
-        //}
+        protected void Button_Register(object sender, EventArgs e)
+        {
 
-
+        }
         protected void rptBranches_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "OpenBranch")
