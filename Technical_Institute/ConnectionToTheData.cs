@@ -17,94 +17,88 @@ namespace Technical_Institute
 
         public static DataTable getAllBranches()
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = "select b.id,b.Branch_Name,b.NumberOfYear,b.Minimum_Degree,SUM(s.Theoretical_Hours+s.Practical_Hours)'NumberOfHours' from Branches b inner join SubjectsToBranches s on b.ID = s.ID_Branch group by b.id,b.Branch_Name,b.NumberOfYear,b.Minimum_Degree";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getBranch(int id)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select b.id,b.Branch_Name,b.NumberOfYear,b.Minimum_Degree,SUM(s.Theoretical_Hours+s.Practical_Hours)'NumberOfHours' from Branches b inner join SubjectsToBranches s on b.ID = s.ID_Branch where b.ID = {id} group by b.id,b.Branch_Name,b.NumberOfYear,b.Minimum_Degree";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getSubjectFromBranch(int id)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select s.ID,s.Subject_Name,sb.Year_Number,sb.Semester_Number,sb.Theoretical_Hours,sb.Practical_Hours,(sb.Theoretical_Hours+sb.Practical_Hours) 'Sum' from Subjects s inner join SubjectsToBranches sb on s.ID = sb.ID_Subject where sb.ID_Branch = {id}";
             var dbConnection = new SqlConnection(connectionString);
-            var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            var dataAdapter = new SqlDataAdapter(query, dbConnection); 
+            dataAdapter.Fill(dt);
+            return dt;
         }
 
         public static DataTable getSubjectFromBranchForSpecificYear(int id, int year)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select s.ID,s.Subject_Name,sb.Year_Number,sb.Semester_Number,sb.Theoretical_Hours,sb.Practical_Hours,(sb.Theoretical_Hours+sb.Practical_Hours) 'Sum' from Subjects s inner join SubjectsToBranches sb on s.ID = sb.ID_Subject where sb.ID_Branch = {id} and sb.Year_Number = {year}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getYearsAndSemesters(int id)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select distinct Year_Number year, Semester_Number semester from SubjectsToBranches where ID_Branch={id} order by 1,2";
             var dbConnection = new SqlConnection(connectionString);
-            var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            var dataAdapter = new SqlDataAdapter(query, dbConnection); 
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getSubjectFromBranchForSpecificYearForSpecificSemester(int id, int year , int semester)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select s.ID,s.Subject_Name,sb.Year_Number,sb.Semester_Number,sb.Theoretical_Hours,sb.Practical_Hours,(sb.Theoretical_Hours+sb.Practical_Hours) 'Sum' from Subjects s inner join SubjectsToBranches sb on s.ID = sb.ID_Subject where sb.ID_Branch = {id} and sb.Year_Number = {year} and sb.Semester_Number = {semester}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getAllUsers()
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select u.ID,u.Is_Admin,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,us.Certificate_Type,u.National_Number,u.Password from Users u left join User_Students us on u.ID = us.ID";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getSpecificUser(string national_number,string password)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select u.ID,u.Is_Admin,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,us.Certificate_Type,u.National_Number,u.Password from Users u left join User_Students us on u.ID = us.ID where u.National_Number = {national_number} and u.Password = {password}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dbConnection.Open();
+            dataAdapter.Fill(dt);
+            dbConnection.Close();
+            return dt;
         }
         public static DataTable checkUser(string national_number, string password)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select u.ID,u.Is_Admin,u.National_Number,u.Password from Users u where u.National_Number = {national_number} and u.Password = {password}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static bool addUser(bool isAdmin, string first_name, string last_name, string national_number, string phone, char gender, float degree, string certificate_type, string password)
         {
@@ -141,13 +135,13 @@ namespace Technical_Institute
                 {
                     try
                     {
-                        DataSet ds = new DataSet();
+                        DataTable dt = new DataTable();
                         query = $"select top 1 * from Users order by ID desc";
                         var dbConnection = new SqlConnection(connectionString);
                         var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                        var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                        dataAdapter.Fill(ds);
-                        id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                        
+                        dataAdapter.Fill(dt);
+                        id = Convert.ToInt32(dt.Rows[0][0]);
                     }
                     catch { return false; }
 
@@ -169,13 +163,13 @@ namespace Technical_Institute
                         catch {
                             try
                             {
-                                DataSet ds = new DataSet();
+                                DataTable dt = new DataTable();
                                 query = $"delete from Users u where u.ID = {id}";
                                 var dbConnection = new SqlConnection(connectionString);
                                 var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                                var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                                dataAdapter.Fill(ds);
-                                id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                                
+                                dataAdapter.Fill(dt);
+                                id = Convert.ToInt32(dt.Rows[0][0]);
                             }
                             catch{ return false; }
                             return false; }
@@ -186,13 +180,13 @@ namespace Technical_Institute
                     {
                         try
                         {
-                            DataSet ds = new DataSet();
+                            DataTable dt = new DataTable();
                             query = $"delete from Users u where u.ID = {id}";
                             var dbConnection = new SqlConnection(connectionString);
                             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                            dataAdapter.Fill(ds);
-                            id = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                            
+                            dataAdapter.Fill(dt);
+                            id = Convert.ToInt32(dt.Rows[0][0]);
                         }
                         catch { return false; }
                     }
@@ -202,51 +196,47 @@ namespace Technical_Institute
         }
         public static DataTable getAllRegisteredStudentsFromAllBranches()
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = "select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getAllRegisteredStudentsInSpecificBranch(int id)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.ID_Branch = {id}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getAllRegisteredStudentsWithSpecificStatusFromAllBranches(int status)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query;
             if (status == 0 || status == 1)
                 query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.Is_Accepted = {status}";
             else
                 query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.Is_Accepted is null";
             var dbConnection = new SqlConnection(connectionString);
-            var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            var dataAdapter = new SqlDataAdapter(query, dbConnection); 
+            dataAdapter.Fill(dt);
+            return dt;
         }
         public static DataTable getAllRegisteredStudentsWithSpecificStatusInSpecificBranch(int id , int status)
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string query;
             if (status == 0 || status == 1)
                 query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.ID_Branch = {id} and r.Is_Accepted = {status}";
             else
                 query = $"select r.ID,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,b.Branch_Name,r.Is_Accepted from Registrations r inner join Users u on r.ID_Student = u.ID inner join User_Students us on u.ID = us.ID inner join Branches b on r.ID_Branch = b.ID where r.ID_Branch = {id} and r.Is_Accepted is null";
             var dbConnection = new SqlConnection(connectionString);
-            var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(ds);
-            return ds.Tables[0];
+            var dataAdapter = new SqlDataAdapter(query, dbConnection);  
+            dataAdapter.Fill(dt);
+            return dt;
         }
     }
 }

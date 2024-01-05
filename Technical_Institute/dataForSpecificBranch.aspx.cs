@@ -16,25 +16,9 @@ namespace Technical_Institute
             var branchName = ConnectionToTheData.getBranch(id);
             BranchName.Text = branchName.Rows[0][1].ToString();
 
-
             Repeater_Years.DataSource = ConnectionToTheData.getYearsAndSemesters(id);
             Repeater_Years.DataBind();
 
-            var data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(id, 1, 1);
-            FirstYearSemesterOne.DataSource = data;
-            FirstYearSemesterOne.DataBind();
-
-            data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(id, 1, 2);
-            FirstYearSemesterTwo.DataSource = data;
-            FirstYearSemesterTwo.DataBind();
-
-            data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(id, 2, 1);
-            SecondYearSemesterOne.DataSource = data;
-            SecondYearSemesterOne.DataBind();
-
-            data = ConnectionToTheData.getSubjectFromBranchForSpecificYearForSpecificSemester(id, 2, 2);
-            SecondYearSemesterTwo.DataSource = data;
-            SecondYearSemesterTwo.DataBind();
         }
 
         protected DataTable GetSubjects(string year, string semester)

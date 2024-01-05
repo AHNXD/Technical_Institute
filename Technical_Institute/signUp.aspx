@@ -32,8 +32,8 @@
             <input id="InputDegree" type="text" runat="server" required="required"/><br />
             <h3>Password:</h3>
             <input id="InputPassword" type="password" runat="server" required="required"/><br /><br />
-            <asp:Button ID="btnSignUp" runat="server" Text="SignUp" OnClick="Button_Click"/>
-            <asp:Label ID="SignUpState" runat="server" Text=""></asp:Label>
+            <asp:Button ID="btnSignUp" runat="server" Text="SignUp" OnClick="Button_Click"/><br /><br />
+            <asp:Label ID="SignUpState" style="color:red" runat="server" Text=""></asp:Label>
         </div>
     </form>
 </body>

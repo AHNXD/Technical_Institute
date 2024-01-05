@@ -15,20 +15,26 @@ namespace Technical_Institute
             rptBranches.DataSource = data;
             rptBranches.DataBind();
 
-            //B1.Text = data.Rows[0][1].ToString();
-            //B2.Text = data.Rows[1][1].ToString();
-            //B3.Text = data.Rows[2][1].ToString();
-            data = ConnectionToTheData.getSpecificUser(Request.QueryString["nb"].ToString(), Request.QueryString["pass"].ToString());
-            if (data.Rows.Count == 0)
+            try
+            {
+                data = ConnectionToTheData.getSpecificUser(Request.QueryString["nb"].ToString(), Request.QueryString["pass"].ToString());
+                if (data.Rows.Count == 0)
+                {
+                    username.Text = "Guest";
+                    degree.Text = "0";
+                }
+                else
+                {
+                    username.Text = $"{data.Rows[0][2]}  {data.Rows[0][3]}";
+                    degree.Text = data.Rows[0][6].ToString();
+                }
+            }
+            catch
             {
                 username.Text = "Guest";
                 degree.Text = "0";
             }
-            else
-            {
-                username.Text = $"{data.Rows[0][2]}  {data.Rows[0][3]}";
-                degree.Text = data.Rows[0][6].ToString();
-            }
+           
         }
         protected void Button_Register(object sender, EventArgs e)
         {

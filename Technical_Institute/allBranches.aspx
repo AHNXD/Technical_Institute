@@ -14,7 +14,7 @@
             <h3><asp:Label ID="degree" runat="server" Text="Label"></asp:Label></h3>
 
 
-            <div style="display:flex;justify-content:space-evenly;justify-items:center;text-align:center;width:auto;">
+            <div style="display:flex;justify-content:space-evenly;justify-items:center;text-align:center;width:auto;padding:16px">
                 <asp:Repeater runat="server" ID="rptBranches" OnItemCommand="rptBranches_ItemCommand">
                     <ItemTemplate>
                         <div style="justify-items:center;text-align:center;width:200px;border:solid;">
@@ -22,16 +22,12 @@
                             <h4>Hours: <%# Eval("NumberOfHours") %></h4>
                             <h4>Years: <%# Eval("NumberOfYear") %></h4>
                             <h4>Minimum Degree: <%# Eval("Minimum_Degree") %></h4>
-                            <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="Button_Register" CommandArgument='<%# Eval("ID") %>' style="background-color:green"/><br /><br />
+                            <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="Button_Register" CommandArgument='<%# Eval("ID") %>'/><br /><br />
                             <asp:LinkButton ID="btnSeeMore" runat="server" Text='See More' CommandName="OpenBranch" CommandArgument='<%# Eval("ID") %>' />
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
-
-<%--         <asp:Button ID="B1" runat="server" Text="" onClick="Button_Click1"/>
-             <asp:Button ID="B2" runat="server" Text="" onClick="Button_Click2"/>
-             <asp:Button ID="B3" runat="server" Text="" onClick="Button_Click3"/>--%>
         </div>
     </form>
 </body>
