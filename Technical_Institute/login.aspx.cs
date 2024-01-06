@@ -12,7 +12,7 @@ namespace Technical_Institute
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
         protected void Button_Login(object sender, EventArgs e)
         {
