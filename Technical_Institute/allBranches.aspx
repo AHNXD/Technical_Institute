@@ -17,7 +17,7 @@
             <div style="display:flex;justify-content:space-evenly;justify-items:center;text-align:center;width:auto;padding:16px">
                 <asp:Repeater runat="server" ID="rptBranches" OnItemCommand="rptBranches_ItemCommand">
                     <ItemTemplate>
-                        <div style="justify-items:center;text-align:center;width:200px;border:solid;">
+                        <div style="justify-items:center;text-align:center;width:200px;border:solid;padding:16px">
                             <h2><%# Eval("Branch_Name") %></h2>
                             <h4>Hours: <%# Eval("NumberOfHours") %></h4>
                             <h4>Years: <%# Eval("NumberOfYear") %></h4>
@@ -28,6 +28,9 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
+            <br /><br />
+            <hr />
+            <asp:Label ID="regStatus" runat="server" Text=""></asp:Label>
         </div>
     </form>
 </body>
