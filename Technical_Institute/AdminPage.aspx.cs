@@ -12,6 +12,8 @@ namespace Technical_Institute
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DataTable data = ConnectionToTheData.getSpecificUser(Request.QueryString["nb"].ToString(), Request.QueryString["pass"].ToString());
+            lblAdminName.Text = $"{data.Rows[0][2]}  {data.Rows[0][3]}";
         }
         protected void Button_Click(object sender, EventArgs e)
         {
