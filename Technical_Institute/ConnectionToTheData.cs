@@ -94,7 +94,7 @@ namespace Technical_Institute
         public static DataTable checkUser(string national_number, string password)
         {
             DataTable dt = new DataTable();
-            string query = $"select u.ID,u.Is_Admin,u.National_Number,u.Password from Users u where u.National_Number = {national_number} and u.Password = {password}";
+            string query = $"select u.ID,u.Is_Admin,u.National_Number,u.Password from Users u where u.National_Number = {national_number} and u.Password = {password.GetHashCode()}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
             dataAdapter.Fill(dt);
@@ -103,7 +103,7 @@ namespace Technical_Institute
         public static bool addUser(bool isAdmin, string first_name, string last_name, string national_number, string phone, char gender, float degree, string certificate_type, string password)
         {
             string query = $"insert into Users (Is_Admin,First_Name,Last_Name,Gender,Phone_Number,National_Number,Password) values (@isAdmin,@first_name,@last_name,@gender,@phone,@national_number,@password)";
-            int rows,id;
+            int rows;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -117,82 +117,96 @@ namespace Technical_Institute
                         command.Parameters.AddWithValue("@gender", gender);
                         command.Parameters.AddWithValue("@phone", phone);
                         command.Parameters.AddWithValue("@national_number", national_number);
-                        command.Parameters.AddWithValue("@password", password);
+                        command.Parameters.AddWithValue("@password", password.GetHashCode());
 
                         rows = command.ExecuteNonQuery();
+                        if (rows > 0)
+                        {
+                            if (isAdmin)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return addStudent(degree, certificate_type);
+                            }
+                        }
+                        else return false;
                     }
                 }
-                catch (Exception ex) { return false; }finally { connection.Close(); }
+                catch { return false; }finally { connection.Close(); }
             }
+        }
+        public static int getLastStudentID()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var query = $"select top 1 * from Users order by ID desc";
+                var dbConnection = new SqlConnection(connectionString);
+                var dataAdapter = new SqlDataAdapter(query, dbConnection);
+                dataAdapter.Fill(dt);
+                return Convert.ToInt32(dt.Rows[0][0]);
+            }
+            catch { return -1; }
+ 
+        }
+        public static bool deleteUser(int id)
+        {
+            var query = $"delete from Users u where u.ID = @id";
+            int rows;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
 
-            if(isAdmin)
-            {
-                return rows > 0 ? true : false;
+                        rows = command.ExecuteNonQuery();
+                        if(rows > 0 ) return true;
+                        else return false;
+                    }
+                }catch { return false; } finally { connection.Close(); }
             }
-            else
+        }
+        public static bool addStudent(float degree, string certificate_type)
+        {
+            int id = getLastStudentID();
+            int rows;
+            if(id != -1)
             {
-                if (rows > 0)
+                var query = "insert into User_Students values (@id,@degree,@certificateType)";
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     try
                     {
-                        DataTable dt = new DataTable();
-                        query = $"select top 1 * from Users order by ID desc";
-                        var dbConnection = new SqlConnection(connectionString);
-                        var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                        
-                        dataAdapter.Fill(dt);
-                        id = Convert.ToInt32(dt.Rows[0][0]);
-                    }
-                    catch { return false; }
-
-                    query = "insert into User_Students values (@id,@degree,@certificateType)";
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        try
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            connection.Open();
-                            using (SqlCommand command = new SqlCommand(query, connection))
-                            {
-                                command.Parameters.AddWithValue("@id", id);
-                                command.Parameters.AddWithValue("@degree", degree);
-                                command.Parameters.AddWithValue("@certificateType", certificate_type);
+                            command.Parameters.AddWithValue("@id", id);
+                            command.Parameters.AddWithValue("@degree", degree);
+                            command.Parameters.AddWithValue("@certificateType", certificate_type);
 
-                                rows = command.ExecuteNonQuery();
+                            rows = command.ExecuteNonQuery();
+                            if(rows > 0 ) return true;
+                            else
+                            {
+                                deleteUser(id);
+                                return false;
                             }
                         }
-                        catch {
-                            try
-                            {
-                                DataTable dt = new DataTable();
-                                query = $"delete from Users u where u.ID = {id}";
-                                var dbConnection = new SqlConnection(connectionString);
-                                var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                                
-                                dataAdapter.Fill(dt);
-                                id = Convert.ToInt32(dt.Rows[0][0]);
-                            }
-                            catch{ return false; }
-                            return false; }
-                        finally { connection.Close(); }
                     }
-                    if(rows > 0)return true;
-                    else
+                    catch
                     {
-                        try
-                        {
-                            DataTable dt = new DataTable();
-                            query = $"delete from Users u where u.ID = {id}";
-                            var dbConnection = new SqlConnection(connectionString);
-                            var dataAdapter = new SqlDataAdapter(query, dbConnection);
-                            
-                            dataAdapter.Fill(dt);
-                            id = Convert.ToInt32(dt.Rows[0][0]);
-                        }
-                        catch { return false; }
+                        deleteUser(id);
+                        return false;
                     }
-                }else
-                { return false; }
-            }return false;
+                    finally { connection.Close(); }
+                }
+            }
+            else return false;
         }
         public static DataTable getAllRegisteredStudentsFromAllBranches()
         {

@@ -23,7 +23,7 @@
             <input id="GenderMale" type="radio" name="Gender" value="M" runat="server"/> Male
             <input id="GenderFemale" type="radio" name="Gender" value="F" runat="server"/> Female
             <h3>Certificate Type:</h3>
-            <select id="Certificate_Type" runat="server" required="required">
+            <select id="Certificate_Type" runat="server">
                 <option value="Other">Other</option>
                 <option value="scientific">scientific</option>
                 <option value="Literary ">Literary </option>
@@ -32,6 +32,7 @@
             <input id="InputDegree" type="text" runat="server" required="required"/><br />
             <h3>Password:</h3>
             <input id="InputPassword" type="password" runat="server" required="required"/><br /><br />
+            <input id="InputIsAdmin" type="checkbox" runat="server" /> Admin<br /><br />
             <asp:Button ID="btnSignUp" runat="server" Text="SignUp" OnClick="Button_Click"/><br /><br />
             <asp:Label ID="SignUpState" style="color:red" runat="server" Text=""></asp:Label>
         </div>

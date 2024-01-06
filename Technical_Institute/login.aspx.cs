@@ -26,9 +26,9 @@ namespace Technical_Institute
                 else
                 {
                     if (data.Rows[0][1].ToString().ToLower() == "false")
-                        Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
+                        Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value.GetHashCode()}");
                     else
-                        Response.Redirect($"adminPage.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
+                        Response.Redirect($"adminPage.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value.GetHashCode()}");
                 }
             }catch (Exception ex)
             {

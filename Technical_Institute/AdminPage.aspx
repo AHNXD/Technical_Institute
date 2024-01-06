@@ -9,7 +9,8 @@
 <body>
     <form id="adminPage" runat="server">
         <div style="justify-items:center;text-align:center;width:auto;">
-             <asp:RadioButtonList ID="branchesList" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+            <h1><asp:Label ID="lblAdminName" runat="server" Text=""></asp:Label></h1><br />
+            <asp:RadioButtonList ID="branchesList" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                  <asp:ListItem Text="All Branches" Value="0" selected="true"/>
                  <asp:ListItem Text="Computer Engineering" Value="1" />
                  <asp:ListItem Text="Network Engineering" Value="2" />

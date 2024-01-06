@@ -19,21 +19,18 @@ namespace Technical_Institute
             {
                 SignUpState.Text = "You Have to Set Your Gender.";
             }
-            else if (Certificate_Type.Value == "Other")
-            {
-                SignUpState.Text = "You Have to Set Your Certification Type.";
-            }
             else if (float.Parse(InputDegree.Value) > 2100)
             {
                 SignUpState.Text = "You Have to Set Your Degree Under Or Equal 2100.";
             }
             else
             {
-                bool state = ConnectionToTheData.addUser(false, InputFirstName.Value, InputLastName.Value, InputNationalNumber.Value, InputPhone.Value,
+                bool state = ConnectionToTheData.addUser(InputIsAdmin.Checked, InputFirstName.Value, InputLastName.Value, InputNationalNumber.Value, InputPhone.Value,
                                         GenderFemale.Checked ? 'F' : 'M', float.Parse(InputDegree.Value), Certificate_Type.Value, InputPassword.Value);
                 if (state)
                 {
-                    Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value}");
+                    if(InputIsAdmin.Checked) Response.Redirect($"adminPage.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value.GetHashCode()}");
+                    else Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value.GetHashCode()}");
                 }
                 else
                 {
