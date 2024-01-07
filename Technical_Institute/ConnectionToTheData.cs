@@ -130,15 +130,12 @@ namespace Technical_Institute
                         if (rows > 0) return true;
                         else return false;
                     }
-                }
-                catch { return false; }
-                finally { connection.Close(); }
+                } catch { return false; } finally { connection.Close(); }
             }
         }
         public static bool addUser(bool isAdmin, string first_name, string last_name, string national_number, string phone, char gender, float degree, string certificate_type, string password)
         {
             string query = $"insert into Users (Is_Admin,First_Name,Last_Name,Gender,Phone_Number,National_Number,Password) values (@isAdmin,@first_name,@last_name,@gender,@phone,@national_number,@password)";
-            int rows;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -154,7 +151,7 @@ namespace Technical_Institute
                         command.Parameters.AddWithValue("@national_number", national_number);
                         command.Parameters.AddWithValue("@password", password.GetHashCode());
 
-                        rows = command.ExecuteNonQuery();
+                        int rows = command.ExecuteNonQuery();
                         if (rows > 0)
                         {
                             if (isAdmin)
@@ -189,7 +186,6 @@ namespace Technical_Institute
         public static bool deleteUser(int id)
         {
             var query = $"delete from Users u where u.ID = @id";
-            int rows;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -199,7 +195,7 @@ namespace Technical_Institute
                     {
                         command.Parameters.AddWithValue("@id", id);
 
-                        rows = command.ExecuteNonQuery();
+                        int rows = command.ExecuteNonQuery();
                         if(rows > 0 ) return true;
                         else return false;
                     }
@@ -209,7 +205,6 @@ namespace Technical_Institute
         public static bool addStudent(float degree, string certificate_type)
         {
             int id = getLastStudentID();
-            int rows;
             if(id != -1)
             {
                 var query = "insert into User_Students values (@id,@degree,@certificateType)";
@@ -224,7 +219,7 @@ namespace Technical_Institute
                             command.Parameters.AddWithValue("@degree", degree);
                             command.Parameters.AddWithValue("@certificateType", certificate_type);
 
-                            rows = command.ExecuteNonQuery();
+                            int rows = command.ExecuteNonQuery();
                             if(rows > 0 ) return true;
                             else
                             {

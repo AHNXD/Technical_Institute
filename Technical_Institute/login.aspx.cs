@@ -25,6 +25,7 @@ namespace Technical_Institute
                 }
                 else
                 {
+                    //[0][1] is admin 
                     if (data.Rows[0][1].ToString().ToLower() == "false")
                         Response.Redirect($"allBranches.aspx?nb={InputNationalNumber.Value}&pass={InputPassword.Value.GetHashCode()}");
                     else

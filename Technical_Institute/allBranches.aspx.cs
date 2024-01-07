@@ -11,8 +11,8 @@ namespace Technical_Institute
 {
     public partial class allBranches : System.Web.UI.Page
     {
-        DataTable Studentdata;
-        DataTable Branchesdata;
+        DataTable Studentdata = new DataTable();
+        DataTable Branchesdata = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             Branchesdata = ConnectionToTheData.getAllBranches();
@@ -29,6 +29,7 @@ namespace Technical_Institute
                 }
                 else
                 {
+                    //[0][2]  first name , [0][3] last name , [0][6] degree
                     username.Text = $"{Studentdata.Rows[0][2]}  {Studentdata.Rows[0][3]}";
                     degree.Text = Studentdata.Rows[0][6].ToString();
                 }
@@ -45,20 +46,21 @@ namespace Technical_Institute
             var btn = (Button)sender;
             if(float.Parse(Studentdata.Rows[0][6].ToString()) >= float.Parse(Branchesdata.Rows[int.Parse(btn.CommandArgument)-1][3].ToString()))
             {
-                bool state = ConnectionToTheData.ifTheStudentRegistered(int.Parse(Studentdata.Rows[0][0].ToString()), int.Parse(Branchesdata.Rows[int.Parse(btn.CommandArgument)-1][0].ToString()));
+                bool state = ConnectionToTheData.ifTheStudentRegistered(int.Parse(Studentdata.Rows[0][0].ToString()), int.Parse(btn.CommandArgument));
                 if(state)
                 {
                     regStatus.Text = "You are already registered.";
                 }
                 else
                 {
-                    bool status = ConnectionToTheData.studentRegister(int.Parse(Studentdata.Rows[0][0].ToString()), int.Parse(Branchesdata.Rows[int.Parse(btn.CommandArgument)-1][0].ToString()));
+                    bool status = ConnectionToTheData.studentRegister(int.Parse(Studentdata.Rows[0][0].ToString()), int.Parse(btn.CommandArgument));
                     if(status) regStatus.Text = "Done.";
                     else regStatus.Text = "Some Thing Went Wrong.";
                 }
             }
             else regStatus.Text = "Your degree dosn't met the minimum requirement.";
         }
+
         protected void rptBranches_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "OpenBranch")
