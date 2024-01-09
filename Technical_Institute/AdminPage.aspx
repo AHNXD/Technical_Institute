@@ -9,7 +9,7 @@
 <body>
     <form id="adminPage" runat="server">
         <div style="justify-items:center;text-align:center;width:auto;">
-            <h1><asp:Label ID="lblAdminName" runat="server" Text=""></asp:Label></h1><br />
+            <h1><asp:Label ID="lblAdminName" style="color:brown" runat="server" Text=""></asp:Label></h1><br />
             <asp:RadioButtonList ID="branchesList" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                 <asp:ListItem Text="All Branches" Value="0" selected="true"/>
                 <asp:ListItem Text="Computer Engineering" Value="1" />
@@ -31,7 +31,7 @@
                 <asp:Button ID="btnSet" runat="server" Text="Update" OnClick="Button_Update"/><br /><br />
                 <asp:Label ID="lblState" runat="server" Text=""></asp:Label>
             <hr />
-             <asp:GridView ID="viewStudents" runat="server"></asp:GridView>
+             <asp:GridView ID="viewStudents" style="border-color:brown" runat="server"></asp:GridView>
         </div>
     </form>
 </body>

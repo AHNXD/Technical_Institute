@@ -185,7 +185,6 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="signUp.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="loginStyle.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />

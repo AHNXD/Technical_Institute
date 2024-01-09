@@ -9,16 +9,16 @@
 <body>
     <form id="AllBranches" runat="server">
         <div style="display:flex;flex-direction:column;text-align:center">
-            <h1><asp:Label ID="Title" runat="server" Text="Technical Institute"></asp:Label></h1>
-            <h3><asp:Label ID="username" runat="server" Text=""></asp:Label></h3>
-            <h3><asp:Label ID="degree" runat="server" Text=""></asp:Label></h3>
+            <h1><asp:Label ID="Title" runat="server" style="color:brown" Text="Technical Institute"></asp:Label></h1>
+            <h3><asp:Label ID="username" runat="server" style="color:goldenrod" Text=""></asp:Label></h3>
+            <h3><asp:Label ID="degree" runat="server" style="color:green" Text=""></asp:Label></h3>
 
 
             <div style="display:flex;justify-content:space-evenly;justify-items:center;text-align:center;width:auto;padding:16px">
                 <asp:Repeater runat="server" ID="rptBranches" OnItemCommand="rptBranches_ItemCommand">
                     <ItemTemplate>
-                        <div style="justify-items:center;text-align:center;width:200px;border:solid;padding:16px">
-                            <h2><%# Eval("Branch_Name") %></h2>
+                        <div style="justify-items:center;text-align:center;width:200px;border:solid;padding:16px;border-color:brown">
+                            <h2 style="color:brown"><%# Eval("Branch_Name") %></h2>
                             <h4>Hours: <%# Eval("NumberOfHours") %></h4>
                             <h4>Years: <%# Eval("NumberOfYear") %></h4>
                             <h4>Minimum Degree: <%# Eval("Minimum_Degree") %></h4>

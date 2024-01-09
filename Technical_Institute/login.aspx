@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Login</title>
-    <link href="loginStyle.css">
 </head>
 <body>
     <form id="Login" runat="server">

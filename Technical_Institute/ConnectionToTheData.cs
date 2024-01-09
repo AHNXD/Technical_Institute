@@ -99,9 +99,7 @@ namespace Technical_Institute
             string query = $"select u.ID,u.Is_Admin,u.First_Name,u.Last_Name,u.Gender,u.Phone_Number,us.Degree,us.Certificate_Type,u.National_Number,u.Password from Users u left join User_Students us on u.ID = us.ID where u.National_Number = {national_number} and u.Password = {password}";
             var dbConnection = new SqlConnection(connectionString);
             var dataAdapter = new SqlDataAdapter(query, dbConnection);
-            dbConnection.Open();
             dataAdapter.Fill(dt);
-            dbConnection.Close();
             return dt;
         }
         public static DataTable checkUser(string national_number, string password)

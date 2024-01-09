@@ -9,7 +9,7 @@
 <body>
     <form id="BranchInfo" runat="server">
         <div style="justify-items:center;text-align:center;width:auto;">
-            <h1><asp:Label ID="BranchName" runat="server" Text="Branch"></asp:Label></h1>
+            <h1><asp:Label ID="BranchName" runat="server" style="color:brown;" Text="Branch"></asp:Label></h1>
 
             <asp:Repeater runat="server" ID="Repeater_Years">
                 <ItemTemplate>
@@ -17,7 +17,7 @@
                     <h3>Year: <asp:Label runat="server" Text='<%# Eval("year") %>'></asp:Label></h3>
                     <h5>Semester: <asp:Label runat="server" Text='<%# Eval("semester") %>'></asp:Label></h5>
 
-                    <asp:GridView runat="server" DataSource='<%# GetSubjects(Eval("year").ToString(), Eval("semester").ToString()) %>'></asp:GridView>
+                    <asp:GridView runat="server" style="border-color:brown;" DataSource='<%# GetSubjects(Eval("year").ToString(), Eval("semester").ToString()) %>'></asp:GridView>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
